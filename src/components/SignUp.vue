@@ -1,6 +1,7 @@
 <template>
   <div class="sign-up-page">
     <div class="sign-up-form">
+      <span v-if="errorMessage" class="error-message">{{ errorMessage }}</span>
       <label class="input-label">Email Address</label>
       <input class="input" v-model="email" type="email" />
       <label class="input-label">Password</label>
@@ -35,15 +36,21 @@ export default defineComponent({
       firstName: '',
       lastName: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      errorMessage: ''
     }
   },
 
   methods: {
-    onSignUp () {
+    async onSignUp () {
       const { email, firstName, lastName, password } = this
 
-      this.signUpUser({ email, firstName, lastName, password })
+      const result = await this.signUpUser({ email, firstName, lastName, password })
+      if (result && result.id) {
+        this.$router.push('/sign-in')
+      } else {
+        this.errorMessage = result.message
+      }
     }
   }
 })
@@ -79,6 +86,11 @@ export default defineComponent({
           line-height: 140%;
           letter-spacing: 0.8px;
         }
+      }
+
+      .error-message {
+        color: #c95959;
+        margin-bottom: 15px;
       }
     }
   }

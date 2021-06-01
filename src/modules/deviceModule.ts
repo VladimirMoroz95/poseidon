@@ -22,7 +22,7 @@ const deviceModels = ref([])
 export default function deviceModel () {
   const getDevices = () => {
     return getDeviceList().then(response => {
-      console.log('response')
+      devices.value = response
     })
   }
   return { devices, deviceModels, getDevices }

@@ -1,6 +1,6 @@
 import { signInParams, signUpParams, tDevice } from '../interfaces'
 
-const URL = 'http://45.128.205.107:31291'
+const URL = 'http://localhost:8080'
 
 function signIn ({ email, password }: signInParams) {
   return FormPostFetch(`${URL}/signin`, { email, password })
@@ -42,7 +42,7 @@ function GetFetch (url: string) {
       mode: 'no-cors',
       method: 'get'
     }
-  )
+  ).then(result => result.json())
 }
 
 function PostFetch (url: string, body: any) {
@@ -55,7 +55,7 @@ function PostFetch (url: string, body: any) {
       method: 'POST',
       body: jsonBody
     }
-  )
+  ).then(result => result.json())
 }
 
 function PutFetch (url: string, body: any) {
@@ -68,7 +68,7 @@ function PutFetch (url: string, body: any) {
       method: 'Put',
       body: jsonBody
     }
-  )
+  ).then(result => result.json())
 }
 
 function FormPostFetch (url: string, body: any) {
@@ -87,5 +87,5 @@ function FormPostFetch (url: string, body: any) {
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     },
     body: formData
-  })
+  }).then(result => result.json())
 }

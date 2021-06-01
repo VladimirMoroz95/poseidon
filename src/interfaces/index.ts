@@ -14,6 +14,10 @@ interface tDevice {
   id: number,
   name: string,
   device: number,
+  createdAt: string,
+  secret: string,
+  updatedAt: string,
+  userId: number
 }
 
 interface tDeviceModels {

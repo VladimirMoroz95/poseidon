@@ -1,11 +1,12 @@
 <template>
   <div class="sign-in-page">
     <div class="sign-in-form">
+      <span v-if="errorMessage" class="error-message">{{ errorMessage }}</span>
       <label class="input-label">Email Address</label>
       <input class="input" v-model="email" type="email" />
       <label class="input-label">Password</label>
       <input class="input" v-model="password" type="password" />
-      <button @click="onLogin" class="button green-button" value="SignIn">
+      <button @click="onLogin" class="button green-button">
         <span>Войти</span>
       </button>
       <router-link to="/sign-up" @click.stop class="button blue-button">
@@ -29,15 +30,19 @@ export default defineComponent({
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      errorMessage: ''
     }
   },
 
   methods: {
-    onLogin () {
-      console.log('this.email', this.email)
-      this.signInUser({ email: this.email, password: this.password, lastName: '', firstName: '' })
-      return null
+    async onLogin () {
+      const result = await this.signInUser({ email: this.email, password: this.password, lastName: '', firstName: '' })
+      if (result && result.id) {
+        this.$router.push('/devices')
+      } else {
+        this.errorMessage = result.message
+      }
     }
   }
 })
@@ -53,6 +58,11 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
+    .error-message {
+      color: #c95959;
+      margin-bottom: 15px;
+    }
 
     .input {
       height: 30px;

@@ -22,14 +22,15 @@ const user = ref({ email: '', password: '' })
 
 export default function authUser (): tAuthUser {
   const signInUser = (params: tUser) => {
-    signIn(params).then((response) => {
-      console.log('signInUser', response)
+    return signIn(params).then((response) => {
+      console.log('response 1', response)
+      return response
     })
   }
 
   const signUpUser = (params: tUser) => {
-    signUp(params).then((response) => {
-      console.log('signUpUser', response)
+    return signUp(params).then((response) => {
+      return response
     })
   }
 
