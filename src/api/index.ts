@@ -1,4 +1,4 @@
-import { signInParams, signUpParams, tDevice } from '../interfaces'
+import { signInParams, signUpParams, tDevice, tGraphic, tAddDevice } from '../interfaces'
 
 const URL = 'http://localhost:8080'
 
@@ -18,12 +18,16 @@ function getDeviceModels () {
   return GetFetch(`${URL}/api/devices`)
 }
 
-function addDevice (device: tDevice) {
+function addDevice (device: tAddDevice): any {
   return PostFetch(`${URL}/api/device`, device)
 }
 
 function updateDevice (device: tDevice) {
   return PutFetch(`${URL}/api/device`, device)
+}
+
+function getGraphics () {
+  return GetFetch(`${URL}/api/dashboard`)
 }
 
 export {
@@ -32,7 +36,8 @@ export {
   getDeviceList,
   getDeviceModels,
   addDevice,
-  updateDevice
+  updateDevice,
+  getGraphics
 }
 
 function GetFetch (url: string) {

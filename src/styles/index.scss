@@ -1,3 +1,13 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .router-link,
 .router-link-active,
 a{
@@ -18,4 +28,46 @@ a{
   font-size: 14px;
   font-weight: 500;
   color: #6d6f78;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  height: 80px;
+  width: 100%;
+  background: #164a7f;
+  box-sizing: border-box;
+
+  &__logo {
+    width: 30%;
+    text-align: left;
+
+    span {
+      color: #ffffff;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 20px;
+    }
+  }
+
+  &__links {
+    display: flex;
+  }
+
+  &__link {
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-right: 25px;
+    font-weight: 600;
+    font-size: 16px;
+  }
+}
+
+.select {
+  border: none;
+  border-bottom: 2px solid #17222e;
+  color: #17222e;
+  cursor: pointer;
+  background: none;
 }

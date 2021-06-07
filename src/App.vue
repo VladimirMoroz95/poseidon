@@ -1,5 +1,12 @@
 <template>
   <div class="main-view">
+    <div class="header">
+      <div class="header__logo"><span>Poseidon</span></div>
+      <div class="header__links">
+        <a href="/devices" class="header__link">Devices</a>
+        <a href="/dashboard" class="header__link">Dashboard</a>
+      </div>
+    </div>
     <router-view/>
   </div>
 </template>
@@ -14,11 +21,6 @@
   height: 100%;
 }
 
-html,
-body {
-  height: 100%;
-}
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -26,6 +28,7 @@ body {
   text-align: center;
   color: #2c3e50;
   height: 100%;
+  padding: 0;
 }
 
 input {

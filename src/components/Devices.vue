@@ -18,15 +18,24 @@
       </div>
     </div>
 
-    <ModalComponent :visible="showModal">
+    <ModalComponent :visible="showModal" @close="showModal = false">
       <template v-slot:body>
         <div class="add-device-modal">
-          <h1 class="modal-title">Add Device</h1>
+          <h1 class="modal-title">ADD DEVICE</h1>
           <label class="input-label">Device Name</label>
           <input class="input" v-model="deviceName" />
-          <button class="button green-button">
-            <span>Добавить</span>
-          </button>
+          <label class="input-label">Device Model</label>
+          <select class="select input" v-model="deviceModel">
+            <option v-for="model in deviceModels" :key="model.id">
+              {{ model.deviceName }}
+            </option>
+          </select>
+
+          <div class="control-panel">
+            <button class="button green-button" @click="addDevice">
+              <span>Добавить</span>
+            </button>
+          </div>
         </div>
       </template>
     </ModalComponent>
@@ -40,19 +49,35 @@ import ModalComponent from '@/components/ModalComponent.vue'
 
 export default defineComponent({
   setup () {
-    const { getDevices, devices } = deviceModule()
-    return { getDevices, devices }
+    const {
+      getDevices,
+      devices,
+      getDevicesModels,
+      deviceModels,
+      addNewDevice
+    } = deviceModule()
+    return { getDevices, devices, getDevicesModels, deviceModels, addNewDevice }
   },
 
   data () {
     return {
       deviceName: '',
+      deviceModel: { id: 0 },
       showModal: false
     }
   },
 
   mounted (): void {
     this.getDevices()
+    this.getDevicesModels()
+  },
+
+  methods: {
+    addDevice () {
+      if (!this.deviceName || !this.deviceModel) return
+
+      this.addNewDevice({ name: this.deviceName, device: this.deviceModel.id })
+    }
   },
 
   components: {
@@ -67,6 +92,7 @@ export default defineComponent({
     flex-direction: column;
     width: 100%;
     padding: 40px;
+    box-sizing: border-box;
 
     .devices-wrapper {
       display: flex;
@@ -122,7 +148,26 @@ export default defineComponent({
       background: #ffffff;
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
       padding: 40px;
+
+      h1 {
+        font-size: 26px;
+        margin-bottom: 40px;
+      }
+
+      .input {
+        width: 260px;
+        height: 40px;
+        font-size: 16px;
+        margin-bottom: 30px;
+      }
+
+      .control-panel {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
     }
   }
 </style>

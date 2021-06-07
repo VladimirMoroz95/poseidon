@@ -1,3 +1,5 @@
+//AUTH
+
 interface signInParams {
   email: string,
   password: string,
@@ -9,6 +11,8 @@ interface signUpParams {
   lastName?: string,
   firstName?: string,
 }
+
+// DEVICES
 
 interface tDevice {
   id: number,
@@ -24,11 +28,28 @@ interface tDeviceModels {
   id: number,
   deviceName: string,
   canalCount: number,
+  createdAt: string,
+  updatedAt: string
+}
+
+interface tAddDevice {
+  name: string,
+  device: number,
+}
+
+// DASHBOARD
+
+interface tGraphic {
+  key: string,
+  value: string,
+  description: string,
 }
 
 export {
   signInParams,
   signUpParams,
   tDevice,
-  tDeviceModels
+  tDeviceModels,
+  tGraphic,
+  tAddDevice
 }
