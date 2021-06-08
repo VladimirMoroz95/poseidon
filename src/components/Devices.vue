@@ -12,7 +12,7 @@
           <span>Device ID: {{ device.id }}</span>
           <span>Secret: {{ device.secret }}</span>
           <span>User ID: {{ device.userId }}</span>
-          <span>Created at: {{ device.createdAt }}</span>
+          <span>Created at: {{ new Date(device.createdAt).getDate() }}</span>
           <span>Updated at: {{ device.updatedAt }}</span>
         </div>
       </div>

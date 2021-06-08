@@ -45,11 +45,18 @@ interface tGraphic {
   description: string,
 }
 
+interface tGraphicDataParams {
+  period: number,
+  device: number,
+  canal: number
+}
+
 export {
   signInParams,
   signUpParams,
   tDevice,
   tDeviceModels,
   tGraphic,
-  tAddDevice
+  tAddDevice,
+  tGraphicDataParams
 }

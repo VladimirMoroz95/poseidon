@@ -1,4 +1,4 @@
-import { signInParams, signUpParams, tDevice, tGraphic, tAddDevice } from '../interfaces'
+import { signInParams, signUpParams, tDevice, tGraphic, tAddDevice, tGraphicDataParams } from '../interfaces'
 
 const URL = 'http://localhost:8080'
 
@@ -30,6 +30,10 @@ function getGraphics () {
   return GetFetch(`${URL}/api/dashboard`)
 }
 
+function getGraphicData ({ period, device, canal }: tGraphicDataParams) {
+  return GetFetch(`${URL}/api/data?period=${period}&device=${device}&canal=${canal}`)
+}
+
 export {
   signIn,
   signUp,
@@ -37,7 +41,8 @@ export {
   getDeviceModels,
   addDevice,
   updateDevice,
-  getGraphics
+  getGraphics,
+  getGraphicData
 }
 
 function GetFetch (url: string) {
