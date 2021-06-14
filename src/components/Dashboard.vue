@@ -6,6 +6,9 @@
           <span class="graphic__name">{{ graphic.name }}</span>
           <span class="graphic__text">click to see graph</span>
         </div>
+        <div v-if="openedGraphicId === graphic.id" class="chart-wrapper">
+          <DashboardChart />
+        </div>
       </div>
     </div>
   </div>
@@ -14,6 +17,7 @@
 <script>
 import { defineComponent } from 'vue'
 import dashboardModule from '../modules/dashboardModule'
+import DashboardChart from './DashboardChart'
 
 export default defineComponent({
   setup () {
@@ -21,15 +25,26 @@ export default defineComponent({
     return { getDashBoardData, graphics, getGraphicDataM }
   },
 
+  data () {
+    return {
+      openedGraphicId: 0
+    }
+  },
+
   mounted () {
     this.getDashBoardData()
   },
 
   methods: {
-    showGraphic (graphic) {
-      const { period, device, canal } = graphic
-      this.getGraphicDataM({ period, device, canal })
+    async showGraphic (graphic) {
+      const { period, device, canal, id } = graphic
+      await this.getGraphicDataM({ period, device, canal })
+      this.openedGraphicId = id
     }
+  },
+
+  components: {
+    DashboardChart
   }
 })
 </script>
@@ -50,6 +65,7 @@ export default defineComponent({
         box-shadow: 1px 3px 12px rgba(0, 0, 0, 0.25), 0 0 17px rgba(0, 0, 0, 0.12);
         border-radius: 5px;
         cursor: pointer;
+        margin-bottom: 25px;
 
         &__header {
           height: 40px;
@@ -70,6 +86,11 @@ export default defineComponent({
           text-transform: uppercase;
         }
       }
+    }
+
+    .chart-wrapper {
+      width: 100%;
+      overflow-x: auto;
     }
   }
 </style>

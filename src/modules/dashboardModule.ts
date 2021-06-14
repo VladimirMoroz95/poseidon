@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { getGraphics, getGraphicData } from '@/api'
-import { tGraphic, tGraphicDataParams } from '../interfaces'
+import { tGraphic, tGraphicDataParams, tGraphicData } from '../interfaces'
 
 const graphics = ref([])
 const graphicData = ref([])
@@ -9,10 +9,15 @@ interface tGraphicRef<tGraphic> {
   value: Array<tGraphic>,
 }
 
+interface tGraphicDataRef<tGraphicData> {
+  value: Array<tGraphicData>,
+}
+
 interface tDashboard {
   getDashBoardData: () => void,
   getGraphicDataM: (params: tGraphicDataParams) => void,
   graphics: tGraphicRef<tGraphic>
+  graphicData: tGraphicDataRef<tGraphicData>
 }
 
 export default function dashboardData (): tDashboard {
@@ -23,10 +28,12 @@ export default function dashboardData (): tDashboard {
   }
 
   const getGraphicDataM = (params: tGraphicDataParams) => {
-    getGraphicData(params).then(result => {
-      graphicData.value = result
+    return getGraphicData(params).then(result => {
+      graphicData.value = result.map((item: tGraphicData) => {
+        return { ...item, createdAt: Date.parse(item.createdAt) }
+      })
     })
   }
 
-  return { getDashBoardData, getGraphicDataM, graphics }
+  return { getDashBoardData, getGraphicDataM, graphics, graphicData }
 }

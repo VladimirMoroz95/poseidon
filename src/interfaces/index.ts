@@ -51,6 +51,11 @@ interface tGraphicDataParams {
   canal: number
 }
 
+interface tGraphicData {
+  value: number,
+  createdAt: string
+}
+
 export {
   signInParams,
   signUpParams,
@@ -58,5 +63,6 @@ export {
   tDeviceModels,
   tGraphic,
   tAddDevice,
-  tGraphicDataParams
+  tGraphicDataParams,
+  tGraphicData
 }
