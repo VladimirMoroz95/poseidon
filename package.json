@@ -13,6 +13,7 @@
     "moment": "^2.29.1",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
+    "vue3-chart-v2": "^0.8.2",
     "vue3-charts": "^1.1.17"
   },
   "devDependencies": {

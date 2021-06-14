@@ -29,9 +29,12 @@ export default function dashboardData (): tDashboard {
 
   const getGraphicDataM = (params: tGraphicDataParams) => {
     return getGraphicData(params).then(result => {
-      graphicData.value = result.map((item: tGraphicData) => {
+      const formattedResult = result.map((item: tGraphicData) => {
         return { ...item, createdAt: Date.parse(item.createdAt) }
       })
+
+      graphicData.value = formattedResult
+      return formattedResult
     })
   }
 

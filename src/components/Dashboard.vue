@@ -7,7 +7,7 @@
           <span class="graphic__text">click to see graph</span>
         </div>
         <div v-if="openedGraphicId === graphic.id" class="chart-wrapper">
-          <DashboardChart />
+          <DashboardChartV2 :title="graphic.name " />
         </div>
       </div>
     </div>
@@ -17,7 +17,7 @@
 <script>
 import { defineComponent } from 'vue'
 import dashboardModule from '../modules/dashboardModule'
-import DashboardChart from './DashboardChart'
+import DashboardChartV2 from './DashboardChartV2'
 
 export default defineComponent({
   setup () {
@@ -38,13 +38,20 @@ export default defineComponent({
   methods: {
     async showGraphic (graphic) {
       const { period, device, canal, id } = graphic
+
+      if (this.openedGraphicId === id) {
+        this.openedGraphicId = 0
+        return
+      } else {
+        this.openedGraphicId = id
+      }
+
       await this.getGraphicDataM({ period, device, canal })
-      this.openedGraphicId = id
     }
   },
 
   components: {
-    DashboardChart
+    DashboardChartV2
   }
 })
 </script>
