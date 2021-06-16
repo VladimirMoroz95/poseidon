@@ -23,7 +23,7 @@ export default defineComponent({
 
       value.forEach(item => {
         data.push(item.value)
-        labels.push(moment(item.createdAt).format('DD - MM - YYYY'))
+        labels.push(moment(item.createdAt).format('DD - MM - YYYY/ HH:MM'))
       })
 
       this.renderChart({
@@ -31,7 +31,7 @@ export default defineComponent({
         datasets: [
           {
             label: this.title,
-            backgroundColor: '#f87979',
+            backgroundColor: '#1654ac',
             data
           }
         ]
